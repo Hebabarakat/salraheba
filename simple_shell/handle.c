@@ -10,6 +10,7 @@ int i;
 for (i = 0; environ[i] != NULL; i++)
 {
 if (_strcmp(name, environ[i]) == 0)
+
 return (environ[i]);
 }
 return (NULL);
@@ -26,6 +27,7 @@ char *hpath(char **argv)
     char *cmd_path = NULL;
     
     path = _getenv("PATH");
+    printf("%s\n", path);
     if (path == NULL)
     {
         fprintf(stderr, "Error: PATH environment variable not set\n");
@@ -39,6 +41,7 @@ char *hpath(char **argv)
         if (cmd_path == NULL)
         {
             perror("Error allocating memory");
+            free(path);
             return NULL;
         }
         sprintf(cmd_path, "%s/%s", token, argv[0]);

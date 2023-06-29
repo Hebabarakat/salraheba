@@ -1,4 +1,35 @@
 #include"main.h"
+
+/**
+ * execution - executes commands entered by users
+ *@cp: command
+ *@cmd:vector array of pointers to commands
+ * Return: 0
+ */
+void execution(char **cp)
+{
+	pid_t child_pid;
+	int status;
+    char *command;
+	char **env = environ;
+    
+    command = hpath(cp);
+
+	child_pid = fork();
+	if (child_pid < 0)
+		perror(command);
+	if (child_pid == 0)
+	{
+		execve(command, cp, env);
+		perror(command);
+		free(cp);
+		exit(98);
+	}
+	else
+		wait(&status);
+    
+}
+
 /**
  *_exce - implement the excution
  *@token: pointer
@@ -7,6 +38,7 @@
 void _exce(char** token)
 {
 pid_t pid;
+char *command;
 int val;
 	pid = fork();
 if (pid == -1)
@@ -16,28 +48,15 @@ exit(EXIT_FAILURE);
 }
 else if (pid == 0)
 {
-val = execve(token[0], token, NULL);
+    command = hpath(token);
+
+val = execve(command, token, NULL);
 if (val == -1)
 {
-        if (errno == ENOENT)
-        {
-            fprintf(stderr, "Error: ls command not found\n");
-        }
-        else if (errno == EACCES)
-        {
-            fprintf(stderr, "Error: cannot access directory '/var'\n");
-        }
-        else
-        {
-            perror("Error executing command");
-        }
-        exit(EXIT_FAILURE);
+    printf("error command\n");
 }
 }
-else
-{
 wait(NULL);
-}
 
 free(token);
 }
