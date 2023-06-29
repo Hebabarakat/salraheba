@@ -113,6 +113,16 @@ void _puts(char *str)
  */
 int _strcmp(char *s1, char *s2)
 {
+    int i;
+    for (i = 0; s1[i] != '='; i++) {
+        if (s1[i] != s2[i]) {
+            return -1;
+        }
+    }
+    return 0;
+}
+/**int _strcmp(char *s1, char *s2)
+{
 	int i, n;
 
 	for (i = 0; s1[i] != '='; i++)
@@ -125,4 +135,4 @@ int _strcmp(char *s1, char *s2)
 
 }
 	return (n);
-}
+}*/

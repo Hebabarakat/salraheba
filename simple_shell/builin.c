@@ -1,4 +1,4 @@
-#include"main.h"
+#include "main.h"
 
 /**
  * execution - executes commands entered by users
@@ -6,13 +6,13 @@
  *@cmd:vector array of pointers to commands
  * Return: 0
  */
-void execution(char **cp)
+void _exce(char **cp)
 {
+	int val;
 	pid_t child_pid;
 	int status;
     char *command;
 	char **env = environ;
-    
     command = hpath(cp);
 
 	child_pid = fork();
@@ -20,49 +20,15 @@ void execution(char **cp)
 		perror(command);
 	if (child_pid == 0)
 	{
-		execve(command, cp, env);
-		perror(command);
-		free(cp);
-		exit(98);
+
+		val = execve(command, cp, env);
+		if(val == -1)
+			perror(command);
 	}
 	else
-		wait(&status);
-    
+		wait(&status); 
 }
-
-/**
- *_exce - implement the excution
- *@token: pointer
- *
- */
-void _exce(char** token)
-{
-pid_t pid;
-char *command;
-int val;
-	pid = fork();
-if (pid == -1)
-{
-perror("fork");
-exit(EXIT_FAILURE);
-}
-else if (pid == 0)
-{
-    command = hpath(token);
-
-val = execve(command, token, NULL);
-if (val == -1)
-{
-    printf("error command\n");
-}
-}
-wait(NULL);
-
-free(token);
-}
-
-/**
- *_strcut - cut the string
+/* 
  *@lineptr: pointer
  *@nreads: integer
  *Return: token always success
@@ -102,3 +68,4 @@ token = strtok(NULL, DELIMITER);
 argv[i] = NULL;
 return (argv);
 }
+

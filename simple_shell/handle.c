@@ -1,10 +1,24 @@
 #include "main.h"
+#include "string.h"
 /**
 *_getenv - Write your own getline function
 *Return: environ[i] always success
 *@name: Use a buffer to read many chars at once and call the least possible
 */
-char *_getenv(char *name)
+/**char *_getenv(char *name)
+{
+    int i;
+    char *env_var;
+    for (i = 0; environ[i] != NULL; i++) {
+        if (strcmp(name, environ[i]) == 0) {
+            env_var = strchr(environ[i], '=') + 1;
+            return env_var;
+        }
+    }
+    return NULL;
+}*/
+/**
+ * char *_getenv(char *name)
 {
 int i;
 for (i = 0; environ[i] != NULL; i++)
@@ -15,6 +29,7 @@ return (environ[i]);
 }
 return (NULL);
 }
+*/
 /**
  *hpath: You will need to use static variables
  */
@@ -26,7 +41,7 @@ char *hpath(char **argv)
     char *del = ":";
     char *cmd_path = NULL;
     
-    path = _getenv("PATH");
+    path = my_getenv("PATH");
     printf("%s\n", path);
     if (path == NULL)
     {
@@ -63,3 +78,4 @@ char *hpath(char **argv)
     }
     return cmd_path;
 }
+
