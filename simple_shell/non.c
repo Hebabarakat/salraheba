@@ -10,10 +10,6 @@ void noninteract(char *filename)
     char *lineptr = NULL;
     char **token;
 
-<<<<<<< HEAD
-    
-=======
->>>>>>> 2cb2f37dc0ced11514e44b7b8160f91626ddfe60
     FILE *fp = fopen(filename, "r");
         printf("Processing file '%s'\n", filename);
     if (fp == NULL)
