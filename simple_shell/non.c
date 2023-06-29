@@ -3,18 +3,15 @@
 #include <stdlib.h>
 #include <errno.h>
 
-size_t _strcspn(const char *str, const char *ch);
-	void noninteract(char *filename)
+void noninteract(char *filename)
   {
     size_t n = 0;
     ssize_t nreads;
     char *lineptr = NULL;
     char **token;
 
-    	 
     FILE *fp = fopen(filename, "r");
         printf("Processing file '%s'\n", filename);
-
     if (fp == NULL)
         {
         fprintf(stderr, "Error: Could not open file '%s': %s\n", filename, strerror(errno));
@@ -59,3 +56,4 @@ count++;
 }
 return (count);
 }
+

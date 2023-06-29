@@ -1,49 +1,34 @@
-#include"main.h"
+#include "main.h"
+
 /**
- *_exce - implement the excution
- *@token: pointer
- *
+ * execution - executes commands entered by users
+ *@cp: command
+ *@cmd:vector array of pointers to commands
+ * Return: 0
  */
-void _exce(char** token)
+void _exce(char **cp)
 {
-pid_t pid;
-int val;
-	pid = fork();
-if (pid == -1)
-{
-perror("fork");
-exit(EXIT_FAILURE);
-}
-else if (pid == 0)
-{
-val = execve(token[0], token, NULL);
-if (val == -1)
-{
-        if (errno == ENOENT)
-        {
-            fprintf(stderr, "Error: ls command not found\n");
-        }
-        else if (errno == EACCES)
-        {
-            fprintf(stderr, "Error: cannot access directory '/var'\n");
-        }
-        else
-        {
-            perror("Error executing command");
-        }
-        exit(EXIT_FAILURE);
-}
-}
-else
-{
-wait(NULL);
-}
+	int val;
+	pid_t child_pid;
+	int status;
+    char *command;
+	char **env = environ;
+    command = hpath(cp);
 
-free(token);
-}
+	child_pid = fork();
+	if (child_pid < 0)
+		perror(command);
+	if (child_pid == 0)
+	{
 
-/**
- *_strcut - cut the string
+		val = execve(command, cp, env);
+		if(val == -1)
+			perror(command);
+	}
+	else
+		wait(&status); 
+}
+/* 
  *@lineptr: pointer
  *@nreads: integer
  *Return: token always success
@@ -83,3 +68,4 @@ token = strtok(NULL, DELIMITER);
 argv[i] = NULL;
 return (argv);
 }
+
