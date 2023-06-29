@@ -11,7 +11,8 @@
 #include <fcntl.h>
 #define DELIMITER " \t\r\n\a"
 extern char **environ;
-int _strcmp(char *s1, char *s2);
+int my_strncmp(const char *s1, const char *s2, size_t n);
+char *my_getenv(const char *name);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char *_strcpy(char *dest, char *src);
 void _exce(char** token);
@@ -22,7 +23,6 @@ void _puts(char *str);
 int _exec(char argv[]);
 char** split_line(char *line);
  char *hpath(char **argv);
- char *_getenv(char *name);
  void noninteract(char *filename);
  void _env(void);
 #endif

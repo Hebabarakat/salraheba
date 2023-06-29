@@ -5,7 +5,7 @@
 *Return: environ[i] always success
 *@name: Use a buffer to read many chars at once and call the least possible
 */
-char *_getenv(char *name)
+/**char *_getenv(char *name)
 {
     int i;
     char *env_var;
@@ -16,7 +16,7 @@ char *_getenv(char *name)
         }
     }
     return NULL;
-}
+}*/
 /**
  * char *_getenv(char *name)
 {
@@ -41,7 +41,7 @@ char *hpath(char **argv)
     char *del = ":";
     char *cmd_path = NULL;
     
-    path = _getenv("PATH");
+    path = my_getenv("PATH");
     printf("%s\n", path);
     if (path == NULL)
     {
@@ -79,12 +79,3 @@ char *hpath(char **argv)
     return cmd_path;
 }
 
-int main (void)
-{
-	char *path;
-
-	path = _getenv("PATH");
-       printf("path = %s\n", path);
-	
-	return 0;
-}
