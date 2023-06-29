@@ -1,0 +1,208 @@
+#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+
+size_t _strcspn(const char *str, const char *ch);
+/**
+ * void noninteract(char *filename)
+  {
+    size_t n = 0;
+    ssize_t nreads;
+    char *lineptr = NULL;
+    char **token;
+    int i;
+    
+
+    	 
+    FILE *fp = fopen(filename, "r");
+        printf("Processing file '%s'\n", filename);
+
+    if (fp == NULL)
+        {
+        fprintf(stderr, "Error: Could not open file '%s': %s\n", filename, strerror(errno));
+        exit(EXIT_FAILURE);
+        }
+
+    token = malloc(sizeof(char*) * 2);
+
+    while ((nreads = getline(&lineptr, &n, fp)) != -1)
+    {
+
+        if (nreads == 1)
+	{
+        continue;
+	}
+
+	token = _strcut(lineptr);
+	_exce(token);
+	
+    }
+
+    fclose(fp);
+            for (i = 0; token[i] != NULL; i++)
+            {
+                free(token[i]);
+            }
+            free(token);
+
+            free(lineptr);
+            lineptr = NULL;
+}
+*/
+void noninteract(char *filename)
+{
+    size_t n = 0;
+    ssize_t nreads;
+    char *lineptr = NULL;
+    char **token = NULL;
+    int i;
+
+    FILE *fp = fopen(filename, "r");
+    printf("Processing file '%s'\n", filename);
+
+    if (fp == NULL)
+    {
+        fprintf(stderr, "Error: Could not open file '%s': %s\n", filename, strerror(errno));
+        exit(EXIT_FAILURE);
+    }
+
+    while ((nreads = getline(&lineptr, &n, fp)) != -1)
+    {
+        if (nreads == 1)
+        {
+            continue;
+        }
+
+        token = _strcut(lineptr);
+        if (token == NULL)
+        {
+            fprintf(stderr, "Error: failed to tokenize input\n");
+            continue;
+        }
+
+        _exce(token);
+
+        /* Free memory allocated for tokens */
+        for (i = 0; token[i] != NULL; i++)
+        {
+            free(token[i]);
+        }
+        free(token);
+
+        /* Reset token pointer */
+        token = NULL;
+    }
+
+    fclose(fp);
+
+    /* Free memory allocated for lineptr */
+    free(lineptr);
+    lineptr = NULL;
+}
+size_t _strcspn(const char *str, const char *ch)
+{
+const char *p, *q;
+size_t count = 0;
+
+for (p = str; *p != '\0'; p++)
+{
+for (q = ch; *q != '\0'; q++)
+{
+if (*p == *q)
+{
+return (count);
+}
+}
+count++;
+}
+return (count);
+}
+/**
+void noninteract(char *filename)
+{
+     char *lineptr = NULL;
+    size_t n = 0;
+    ssize_t nreads;
+    char **token;
+    int saved_stdout;
+
+
+    FILE *fp = fopen(filename, "r");
+ 
+    FILE *null_device = fopen("/dev/null", "w");
+    if (fp == NULL)
+    {
+        fprintf(stderr, "Error: Could not open file '%s': %s\n", filename, strerror(errno));
+        exit(EXIT_FAILURE);
+    }
+
+
+    if (null_device == NULL)
+    {
+        fprintf(stderr, "Error: Could not open null device: %s\n", strerror(errno));
+        exit(EXIT_FAILURE);
+    }
+
+     saved_stdout = dup(STDOUT_FILENO);
+    if (dup2(fileno(null_device), STDOUT_FILENO) == -1)
+    {
+        fprintf(stderr, "Error: Could not redirect stdout: %s\n", strerror(errno));
+        exit(EXIT_FAILURE);
+    }
+
+    while ((nreads = getline(&lineptr, &n, fp)) != -1)
+    {
+        lineptr[strcspn(lineptr, "\n")] = '\0';
+
+        if (nreads == 1)
+        {
+            continue;
+        }
+
+        token = _strcut(lineptr);
+        _exce(token);
+    }
+
+    fflush(stdout);
+    dup2(saved_stdout, STDOUT_FILENO);
+
+    free(lineptr);
+    fclose(fp);
+    fclose(null_device);
+}
+
+{
+
+    FILE *fp = fopen(filename, "r");
+     char *line;
+    size_t len;
+    ssize_t nreads;
+    char **token;
+    if (filename == NULL)
+    {
+        return;
+    }
+
+    if (fp == NULL)
+    {
+        fprintf(stderr, "Error: Could not open file '%s': %s\n", filename, strerror(errno));
+        exit(EXIT_FAILURE);
+    }
+
+    line = NULL;
+    while ((nreads = getline(&line, &len, fp)) != -1)
+    {
+        if (nreads == 1)
+        {
+            continue;
+        }
+
+        token = _strcut(line);
+        _exce(token);
+    }
+
+    free(line);
+    fclose(fp);
+}
+*/
