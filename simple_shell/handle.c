@@ -13,7 +13,7 @@ char *hpath(char **argv)
         return NULL;
     }
 
-    *directories = split_line(path);
+    directories = split_line(path);
     free(path);
 
     cmd_path = NULL;
@@ -24,7 +24,7 @@ char *hpath(char **argv)
         if (cmd_path == NULL)
         {
             perror("Error allocating memory");
-            free_split(directories);
+            free(directories);
             return NULL;
         }
 
@@ -32,7 +32,7 @@ char *hpath(char **argv)
 
         if (access(cmd_path, X_OK) == 0)
         {
-            free_split(directories);
+            free(directories);
             return cmd_path;
         }
 
@@ -41,7 +41,7 @@ char *hpath(char **argv)
         i++;
     }
 
-    free_split(directories);
+    free(directories);
 
     fprintf(stderr, "Error: Command '%s' not found in PATH\n", argv[0]);
     return NULL;
