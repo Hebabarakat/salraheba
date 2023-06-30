@@ -6,7 +6,7 @@
  *@cmd:vector array of pointers to commands
  * Return: 0
  */
-void _exce(char **cp)
+/**void _exce(char **cp)
 {
 	int val;
 	pid_t child_pid;
@@ -27,7 +27,7 @@ void _exce(char **cp)
 	}
 	else
 		wait(&status); 
-}
+}*/
 /* 
  *@lineptr: pointer
  *@nreads: integer
