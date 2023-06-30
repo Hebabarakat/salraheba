@@ -21,8 +21,8 @@ int _putchar(char c);
 int _strlen(char *s);
 void _puts(char *str);
 int _exec(char argv[]);
-char** split_line(char *line);
  char *hpath(char **argv);
  void noninteract(char *filename);
  void _env(void);
+ char **split_line(char *line);
 #endif
