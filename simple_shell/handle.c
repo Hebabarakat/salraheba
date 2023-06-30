@@ -1,7 +1,11 @@
 #include "main.h"
 #include <string.h>
+
 char *hpath(char **argv)
 {
+    int i;
+    char **directories;
+    char *cmd_path;
     char *path = my_getenv("PATH");
     if (path == NULL)
     {
@@ -9,11 +13,11 @@ char *hpath(char **argv)
         return NULL;
     }
 
-    char **directories = split_line(path);
+    *directories = split_line(path);
     free(path);
 
-    char *cmd_path = NULL;
-    int i = 0;
+    cmd_path = NULL;
+    i = 0;
     while (directories[i] != NULL)
     {
         cmd_path = malloc(strlen(directories[i]) + strlen(argv[0]) + 2);
