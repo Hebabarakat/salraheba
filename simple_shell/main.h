@@ -11,4 +11,7 @@
 #include <fcntl.h>
 #define DELMITER "\t\r\n\a"
 extern char **environ;
+void non_interactive (char *filename);
+void _execve(char **argv);
+char ** strcut (char *lineptr);
 #endif
