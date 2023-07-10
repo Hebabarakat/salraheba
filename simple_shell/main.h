@@ -9,7 +9,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <fcntl.h>
-#define DELMITER "\t\r\n\a"
+#define DELMITER " \t\r\n\a"
 extern char **environ;
 void non_interactive (char *filename);
 void _execve(char **argv);
