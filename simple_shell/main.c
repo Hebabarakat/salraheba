@@ -9,7 +9,6 @@ while (1)
 {
 printf ("$ ");
 scanf ("%s", input);
-//print prompt
 }
     }
     if (argc > 2)
