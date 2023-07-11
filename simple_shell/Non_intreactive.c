@@ -7,8 +7,6 @@
 */
 void non_interactive (char *filename)
 {
-int i; 
-ssize_t nreads;
 char *lineptr;
 size_t n;
 char **token;
@@ -28,28 +26,17 @@ if (token == NULL)
     perror("token");
     exit(EXIT_FAILURE);
 }
-nreads = getline(&lineptr,&n, file);
-lineptr[nreads - 1] = '\0';
-while (nreads != -1)
+while (getline(&lineptr,&n,file) != -1)
 {
-    if (nreads == 1)
-    {
-        continue;
-    }
+
     token = strcut(lineptr);
 _execve(token);
 }
 
-
  fclose(file);
 
-for (i = 0; token[i] !=(void *) '\0'; i++)
-{
- free(token[i]);
-}
  free (token);
- free (lineptr);
-lineptr = NULL;
+free(lineptr);
 
 }
 

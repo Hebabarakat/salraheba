@@ -1,10 +1,7 @@
 #include "main.h"
 
-int main(int argc, char **argv)
+int main(void)
 {
-    if (argc == 2)
-{
-    non_interactive(argv[1]);
-    }
+    non_interactive("dd");
 return (0);
 }
