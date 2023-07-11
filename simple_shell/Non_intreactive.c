@@ -29,6 +29,7 @@ if (token == NULL)
     exit(EXIT_FAILURE);
 }
 nreads = getline(&lineptr,&n, file);
+lineptr[nreads - 1] = '\0';
 while (nreads != -1)
 {
     if (nreads == 1)
