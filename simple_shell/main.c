@@ -7,34 +7,19 @@ non_interactive();
 }
 else
 {
-char input[100];
+char *input;
 char **args;
-int i;
 char c;
+c = '\0';
 while(1)
 {
 write(1, "$ ", 2);
-i = 0;
-while(read(0, &c, 1) == 1)
-{
-if (c == '\n')
-{
-input[i] = '\0';
-break;
-}
-input[i++] = c;
-}
-if (i== 0)
-{
-continue;
-}
-if (input[0] == 'e' && input[1] == 'x' && input[2] == 'i' && input [3] == 't')
-{
-break;
-}
+input = _readline(c);
 args = strcut (input);
 _execve(args);
 }
+free(input);
 }
+
 return 0;
 }
