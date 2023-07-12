@@ -1,21 +1,16 @@
 #include "main.h"
 int main(void)
 {
-	if (!isatty(STDIN_FILENO))
+if (!isatty(STDIN_FILENO))
 {
-        non_interactive();
+non_interactive();
 }
-	else
+else
 {
-	char input[100];
-	char *args [20];
-	int status;
-	int i;
-int j;
-int k;
+char input[100];
+char **args;
+int i;
 char c;
-pid_t pid;
-
 while(1)
 {
 write(1, "$ ", 2);
@@ -27,8 +22,7 @@ if (c == '\n')
 input[i] = '\0';
 break;
 }
-input[i] = c;
-i++;
+input[i++] = c;
 }
 if (i== 0)
 {
@@ -38,32 +32,9 @@ if (input[0] == 'e' && input[1] == 'x' && input[2] == 'i' && input [3] == 't')
 {
 break;
 }
-j = 0;
-for (k = 0; k < i; k++)
-{
-if (input [k] == ' ')
-{
-input [k] = '\0';
-args[j++] = &input[k + 1];
+args = strcut (input);
+_execve(args);
 }
 }
-args[j] = NULL;
- pid = fork();
-if (pid == -1)
-{
-write(2, "fork failed\n", 12);
-continue;
+return 0;
 }
-if (pid == 0)
-{
-execv(input, args);
-write(2, "execv failed\n", 13);
-_exit(1);
-}
-wait(&status);
-}
-}
-
-    return 0;
-}
-
