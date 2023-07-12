@@ -9,6 +9,7 @@ int i;
 int j;
 int k;
 char c;
+pid_t pid;
 
 while(1)
 {
@@ -41,7 +42,7 @@ args[j++] = &input[k + 1];
 }
 }
 args[j] = NULL;
-pid_t pid = fork();
+ pid = fork();
 if (pid == -1)
 {
 write(2, "fork failed\n", 12);
