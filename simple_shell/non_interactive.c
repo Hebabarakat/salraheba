@@ -27,10 +27,15 @@ while (nreads != -1)
         }
 
     token = strcut(lineptr);
+
     if (token == NULL)
     {
    perror ("token");
    exit (EXIT_FAILURE);
+    }
+    if (strcmp (token[0],"exit") == 0)
+    {
+	    exit(0);
     }
 _execve(token);
 free (lineptr);
