@@ -11,6 +11,7 @@
 #include <fcntl.h>
 #define DELMITER " \t\r\n\a"
 #define del "\n"
+void read_noninteractiv(char *lineptr, ssize_t nreads);
 extern char **environ;
 char *_readline(char c);
 void non_interactive (void);
