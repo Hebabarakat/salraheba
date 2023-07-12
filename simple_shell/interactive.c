@@ -12,11 +12,11 @@ char c;
 
 while(1)
 {
-write(1, "$", 2);
+write(1, "$ ", 2);
 i = 0;
-while (read(0, &c, 1)==1);
+while(read(0, &c, 1) == 1);
 {
-if (c== '\n')
+if (c == '\n')
 {
 input[i] = '\0';
 break;
