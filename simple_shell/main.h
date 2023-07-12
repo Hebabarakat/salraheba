@@ -10,8 +10,10 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #define DELMITER " \t\r\n\a"
+#define del "\n"
 extern char **environ;
-void non_interactive (char *filename);
+void non_interactive (void);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void _execve(char **argv);
 char ** strcut (char *lineptr);
 #endif

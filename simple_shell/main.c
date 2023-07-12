@@ -1,7 +1,12 @@
 #include "main.h"
-
 int main(void)
 {
-    non_interactive("dd");
-return (0);
+	if (!isatty(STDIN_FILENO))
+{
+        non_interactive();
 }
+
+
+    return 0;
+}
+

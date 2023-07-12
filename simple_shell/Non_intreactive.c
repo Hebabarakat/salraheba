@@ -5,38 +5,38 @@
  *
  *
 */
-void non_interactive (char *filename)
+void non_interactive (void)
 {
 char *lineptr;
 size_t n;
 char **token;
-FILE *file;
-
+ssize_t nreads;
 n = 0;
 lineptr = NULL;
-file = fopen(filename, "r");
-if (file == NULL)
-        {
-        fprintf(stderr, "Error: Could not open file '%s': %s\n", filename, strerror(errno));
-        exit(EXIT_FAILURE);
-        }
-token = malloc(sizeof (char *) * 2);
-if (token == NULL)
+nreads = getline(&lineptr,&n,stdin);
+if (nreads == -1)
 {
-    perror("token");
-    exit(EXIT_FAILURE);
+perror ("nreads");
+exit(EXIT_FAILURE);
 }
-while (getline(&lineptr,&n,file) != -1)
+while (nreads != -1)
 {
+	 if (lineptr[strlen(lineptr) - 1] == '\n')
+        {
+            lineptr[strlen(lineptr) - 1] = '\0';
+        }
 
     token = strcut(lineptr);
+    if (token == NULL)
+    {
+   perror ("token");
+   exit (EXIT_FAILURE);
+    }
 _execve(token);
+free (lineptr);
+nreads = getline(&lineptr,&n,stdin);
 }
 
- fclose(file);
-
- free (token);
-free(lineptr);
 
 }
 

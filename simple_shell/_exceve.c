@@ -7,16 +7,16 @@
 */
 void _execve(char **argv)
 {
-pid_t id;
+pid_t pid;
+int status;
 
-
-id = fork();
-if (id < 0)
+pid = fork();
+if (pid < 0)
 {
 perror ("fork");
     exit(EXIT_FAILURE);
 }
-if (id == 0)
+if (pid == 0)
 {
    if(execve(argv[0], argv, NULL) == -1)
    {
@@ -26,8 +26,8 @@ if (id == 0)
 }
 else
 {
-    wait(NULL);
-
+    wait(&status);
+    free(argv);
 }
 }
 
