@@ -14,14 +14,28 @@ int my_strncmp(const char *s1, const char *s2, size_t n) {
     return s1[i] - s2[i];
 }
 
-char *my_getenv(const char *name) {
-    char *value = NULL;
+char *_getenv(const char *name)
+{
     int i;
-    for (i = 0; environ[i] != NULL; i++) {
-        if (my_strncmp(name, environ[i], strlen(name)) == 0) {
-            value = environ[i] + strlen(name) + 1;
-            break;
+    char *token;
+
+    i = 0;
+    while(environ[i])
+    {
+    token = strtok(environ[i],"=");
+        if (strcmp(token, environ[i]) == 0)
+       	{
+            return(NULL,"\n");
         }
+	i++;
     }
-    return value;
+    return (NULL);
+}
+
+char *commandpath (char *cmd)
+{
+	char *path;
+	char *toknen;
+	char *cmd_full;
+	§
 }
