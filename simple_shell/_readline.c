@@ -20,6 +20,10 @@ break;
 }
 input[i++] = c;
 }
+if (input[0] == 'e' && input[1] == 'n' && input[2] == 'v')
+{
+	_env();
+}
 if (input[0] == 'e' && input[1] == 'x' && input[2] == 'i' && input [3] == 't')
 {
 free(input);

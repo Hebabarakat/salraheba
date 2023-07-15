@@ -16,6 +16,7 @@ extern char **environ;
 char *handle_path(char *command);
 char *_getenv(const char *name);
 char *_readline(char c);
+void _env(void);
 void non_interactive (void);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void _execve(char **argv);

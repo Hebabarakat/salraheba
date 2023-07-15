@@ -45,6 +45,10 @@ exit(EXIT_FAILURE);
    perror ("token");
    exit (EXIT_FAILURE);
     }
+    if (strcmp (token[0], "env") == 0)
+    {
+	    _env();
+    }
     if (strcmp (token[0],"exit") == 0)
     {
             exit(0);
