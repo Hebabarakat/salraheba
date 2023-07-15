@@ -1,59 +1,32 @@
 #include "main.h"
-int main (void)
+char *handle_path(char *command)
 {
-char *command = "ls";
-char *path = getenv("PATH");
-char *dir, *p;
-/* Iterate over the directories in the PATH */
-for (p = path; p = (*dir == '\0') ? (dir + 1) : (dir + 2))
+char *command_path;
+char *path;
+char *dir;
+
+path = _getenv("PATH");
+/* Split the path */
+for (dir = strtok(path, ":"); dir != NULL; dir = strtok(NULL, ":"))
 {
-dir = p;
-/* Find the end of the current directory */
-while (*p != '\0' && *p != ':')
-P++;
-}
-/*Build the full path to the command */
-char *command_path = malloc(p - dir + strlen(command) + 2);
-if (comand_path == Null)
+	/*Build the full path to the command */
+command_path = malloc(strlen(path) + strlen(command) + 2);
+if (command_path == NULL)
 {
 perror("malloc");
 exit(1);
 }
-snprintf(commant_path, p - dir + strlen(command) + 2, "%.*s/%s", (int)(p - dir), dir, command);
+strcpy(command_path,dir);
+strcat(command_path,"/");
+strcat(command_path, command);
+
 /* Check if command exists */
+
 if (access(command_path, X_OK) == 0)
 {
-/* The command exists, so fork and execute it */
-pid_t pid = fork();
-if (pid == -1)
-{
-perror("fork");
-exit(1);
+	return (command_path);
 }
-else if (pid == 0)
-{
-/* Child process */
-execv(command_path, NULL);
-/* execv() only returns if there's an error */
-perror("execv");
-exit(1);
+	free(command_path);
 }
-else
-{
-/* Parent process */
-int status;
-wait(&status);
-printf("Child process exited with status %d\n", status);
-exit(0);
-}
-}
-free(command_path);
-/* If we've reached the end of the PATH, break out of the loop */
-if (*p == '\0')
-{
-break;
-}
-}
-printf("Command not found\n");
-exit(1);
+return(NULL);
 }

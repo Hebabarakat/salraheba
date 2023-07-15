@@ -13,6 +13,8 @@
 #define del "\n"
 void read_noninteractiv(char *lineptr, ssize_t nreads);
 extern char **environ;
+char *handle_path(char *command);
+char *_getenv(const char *name);
 char *_readline(char c);
 void non_interactive (void);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);

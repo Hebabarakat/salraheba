@@ -9,6 +9,7 @@ void _execve(char **argv)
 {
 pid_t pid;
 int status;
+char* path;
 
 pid = fork();
 if (pid < 0)
@@ -18,9 +19,14 @@ perror ("fork");
 }
 if (pid == 0)
 {
-   if(execve(argv[0], argv, NULL) == -1)
+path = handle_path(argv[0]);
+if (path)
+{
+   execve(path, argv, NULL);
+}
+   else
    {
-    perror("excution");
+    perror("command not found");
     exit(EXIT_FAILURE);
    }
 }

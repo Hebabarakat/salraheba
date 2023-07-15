@@ -23,19 +23,11 @@ char *_getenv(const char *name)
     while(environ[i])
     {
     token = strtok(environ[i],"=");
-        if (strcmp(token, environ[i]) == 0)
+        if (strcmp(name, token) == 0)
        	{
-            return(NULL,"\n");
+            return (strtok(NULL,"\n"));
         }
 	i++;
     }
     return (NULL);
-}
-
-char *commandpath (char *cmd)
-{
-	char *path;
-	char *toknen;
-	char *cmd_full;
-	§
 }
