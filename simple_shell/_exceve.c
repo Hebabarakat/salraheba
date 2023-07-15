@@ -22,7 +22,11 @@ if (pid == 0)
 path = handle_path(argv[0]);
 if (path)
 {
-   execve(path, argv, NULL);
+  if(execve(path, argv, NULL) == -1)
+  {
+	  perror("excution");
+    exit(EXIT_FAILURE);
+  }
 }
    else
    {
@@ -33,6 +37,7 @@ if (path)
 else
 {
     wait(&status);
+
     free(argv);
 }
 }

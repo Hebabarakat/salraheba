@@ -26,7 +26,6 @@ if (access(command_path, X_OK) == 0)
 {
 	return (command_path);
 }
-	free(command_path);
 }
 return(NULL);
 }
