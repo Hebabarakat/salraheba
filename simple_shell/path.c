@@ -5,6 +5,11 @@ char *command_path;
 char *path;
 char *dir;
 
+/*check the command is fullpath*/
+if (access(command, X_OK) == 0)
+		{
+		return (command);
+		}
 path = _getenv("PATH");
 /* Split the path */
 for (dir = strtok(path, ":"); dir != NULL; dir = strtok(NULL, ":"))
