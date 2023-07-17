@@ -2,7 +2,7 @@
 
 ################################################################################
 # Description for the intranet check (one line, support Markdown syntax)
-# Copy the file /bin/ls to `hbtn_ls` (in the parent's parent directory) and execute `./.././../hbtn_ls /var`
+# Remove all environment variables and execute `/bin/ls`
 
 ################################################################################
 # The variable 'compare_with_sh' IS OPTIONNAL
@@ -21,7 +21,7 @@
 # as follows: "echo $shell_input | ./hsh"
 #
 # It can be empty and multiline
-shell_input="./.././../hbtn_ls /var"
+shell_input="/bin/ls"
 
 ################################################################################
 # The variable 'shell_params' IS OPTIONNAL
@@ -41,7 +41,15 @@ shell_input="./.././../hbtn_ls /var"
 # Return value: Discarded
 function check_setup()
 {
-	$CP "/bin/ls" "$PWD/../../hbtn_ls"
+	current_env=$(/usr/bin/env)
+	for i in `/usr/bin/env | /usr/bin/cut -d'=' -f1`
+	do
+		unset $i
+	done
+
+	# Important: Disable valgrind when running without an environment
+	let valgrind_error=0
+	let valgrind_leak=0
 
 	return 0
 }
@@ -83,8 +91,6 @@ function sh_setup()
 function check_callback()
 {
 	status=$1
-
-	$RM -f "$PWD/../../hbtn_ls"
 
 	return $status
 }

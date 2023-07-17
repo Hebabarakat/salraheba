@@ -24,9 +24,9 @@ exit(EXIT_FAILURE);
 	{
 		continue;
 	}	
-       	if (lineptr[strlen(lineptr) - 1] == '\n')
+       	if (lineptr[_strlen(lineptr) - 1] == '\n')
         {
-            lineptr[strlen(lineptr) - 1] = '\0';
+            lineptr[_strlen(lineptr) - 1] = '\0';
         }
     token = strcut(lineptr);
 

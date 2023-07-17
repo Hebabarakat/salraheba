@@ -21,4 +21,8 @@ void non_interactive (void);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void _execve(char **argv);
 char ** strcut (char *lineptr);
+/*strings.h*/
+size_t _strlen(char*s);
+char *_strcat(char *dest, char *src);
+char *_strcpy(char *dest, const char *src);
 #endif

@@ -21,9 +21,9 @@ if (command_path == NULL)
 perror("malloc");
 exit(1);
 }
-strcpy(command_path,dir);
-strcat(command_path,"/");
-strcat(command_path, command);
+	_strcpy(command_path,dir);
+ _strcat(command_path,"/");
+ _strcat(command_path, command);
 
 /* Check if command exists */
 
