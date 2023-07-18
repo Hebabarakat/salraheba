@@ -20,26 +20,22 @@ perror ("fork");
 if (pid == 0)
 {
 path = handle_path(argv[0]);
-if (path)
+if (execve(path, argv, NULL) == -1)
 {
-  if(execve(path, argv, NULL) == -1)
-  {
-	  perror("excution");
-    exit(EXIT_FAILURE);
+	fprintf(stderr, "%s: command not found\n", argv[0]);
+      printf("child process exit status: %d\n", 127);
+      exit(127);
+    }
   }
-}
-   else
-   {
-    perror("command not found");
-    exit(EXIT_FAILURE);
-   }
-}
-else
-{
-    wait(&status);
-
+  else if (pid > 0)
+  {
+    waitpid(pid, &status, 0);
+    if (WIFEXITED(status)) {
+      int exit_status = WEXITSTATUS(status);
+      printf("parent process exit status: %d\n", exit_status);
+    }
+  }
     free(argv);
-}
 }
 
 

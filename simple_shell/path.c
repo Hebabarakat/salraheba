@@ -30,7 +30,11 @@ exit(1);
 if (access(command_path, X_OK) == 0)
 {
 	return (command_path);
+
 }
 }
-return(NULL);
+  /* Command not found */
+fprintf(stderr, "%s: command not found\n", command);
+return (NULL);
 }
+
