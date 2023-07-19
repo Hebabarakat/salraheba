@@ -11,6 +11,9 @@ char *lineptr;
 size_t n;
 ssize_t nreads;
 char **token;
+int i;
+
+i = 1;
 n = 0;
 lineptr = NULL;
 while ((nreads = getline(&lineptr,&n,stdin)) != -1)
@@ -35,15 +38,15 @@ exit(EXIT_FAILURE);
    perror ("token");
    exit (EXIT_FAILURE);
     }
-    if (strcmp (token[0], "env") == 0)
+    if (_strcmp (token[0], "env") == 0)
     {
 	    _env();
     }
-    if (strcmp (token[0],"exit") == 0)
+    if (_strcmp (token[0],"exit") == 0)
     {
             exit(0);
     }
-_execve(token);
+_execve(token, i);
 
 }
 }

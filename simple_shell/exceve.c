@@ -5,7 +5,7 @@
  * 
  * 
 */
-void _execve(char **argv)
+void _execve(char **argv, int i)
 {
 pid_t pid;
 int status;
@@ -19,14 +19,24 @@ perror ("fork");
 }
 if (pid == 0)
 {
-path = handle_path(argv[0]);
-if (execve(path, argv, NULL) == -1)
+path = handle_path(argv[0], i);
+
+if (path)
 {
-	fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
+	if (execve(path, argv, NULL) == -1)
+{
+	_printf("./hsh: %d: %s: not found\n",i, argv[0]);
       exit(127);
     }
+}
+else
+{
+
+	_printf("./hsh: %d: %s: not found\n",i, argv[0]);
+	exit(127);
   }
-  else if (pid > 0)
+}
+else
   {
     waitpid(pid, &status, 0);
     if (WIFEXITED(status)) {

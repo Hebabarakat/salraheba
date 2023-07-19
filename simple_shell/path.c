@@ -1,5 +1,5 @@
 #include "main.h"
-char *handle_path(char *command)
+char *handle_path(char *command, int i)
 {
 char *command_path;
 char *path;
@@ -14,9 +14,10 @@ path = _getenv("PATH");
 /* Split the path */
 if (path == NULL)
 {
-	fprintf((stderr), "./hsh: 1: %s: not found\n", command);
-		exit (127);
+   _printf("./hsh: %d: %s: not found\n",i, command);
+exit (127);
 }
+
 for (dir = strtok(path, ":"); dir != NULL; dir = strtok(NULL, ":"))
 {
 	/*Build the full path to the command */
@@ -39,6 +40,6 @@ if (access(command_path, X_OK) == 0)
 }
 }
   /* Command not found */
-return (NULL);
+return(NULL);
 }
 
