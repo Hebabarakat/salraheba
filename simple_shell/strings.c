@@ -48,3 +48,7 @@ dest[i] = '\0';
 
 	return(dest);
 }
+int _strcmp(const char *s1, const char *s2)
+{
+	if (_strlen(s1) == _strlen(s2))
+

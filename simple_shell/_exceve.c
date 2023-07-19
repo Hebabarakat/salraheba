@@ -22,8 +22,7 @@ if (pid == 0)
 path = handle_path(argv[0]);
 if (execve(path, argv, NULL) == -1)
 {
-	fprintf(stderr, "%s: command not found\n", argv[0]);
-      printf("child process exit status: %d\n", 127);
+	fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
       exit(127);
     }
   }
@@ -32,7 +31,7 @@ if (execve(path, argv, NULL) == -1)
     waitpid(pid, &status, 0);
     if (WIFEXITED(status)) {
       int exit_status = WEXITSTATUS(status);
-      printf("parent process exit status: %d\n", exit_status);
+    exit(exit_status);
     }
   }
     free(argv);

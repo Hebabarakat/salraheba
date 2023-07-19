@@ -22,11 +22,13 @@ char *_getenv(const char *name)
     while(environ[i])
     {
     token = strtok(environ[i],"=");
-        if (strcmp(name, token) == 0)
+        
+    	if (strcmp(name, token) == 0)
        	{
             return (strtok(NULL,"\n"));
         }
 	i++;
     }
     return (NULL);
+    }
 }
