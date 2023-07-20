@@ -23,7 +23,7 @@ path = handle_path(argv[0], i);
 
 if (path)
 {
-	if (execve(path, argv, NULL) == -1)
+	if (execve(path, argv, environ) == -1)
 {
 	_printf("./hsh: %d: %s: not found\n",i, argv[0]);
       exit(127);
@@ -39,11 +39,7 @@ else
 else
   {
     waitpid(pid, &status, 0);
-    if (WIFEXITED(status)) {
-      int exit_status = WEXITSTATUS(status);
-    exit(exit_status);
     }
-  }
     free(argv);
 }
 

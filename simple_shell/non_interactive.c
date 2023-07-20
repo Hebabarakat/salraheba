@@ -47,7 +47,7 @@ exit(EXIT_FAILURE);
             exit(0);
     }
 _execve(token, i);
-
+lineptr = NULL;
+n = 0;
 }
 }
-
