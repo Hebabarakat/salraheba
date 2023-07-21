@@ -38,8 +38,14 @@ if (access(command_path, X_OK) == 0)
 	return (command_path);
 
 }
+
 }
+if (!command_path)
+{
   /* Command not found */
-return(NULL);
+	_printf("./hsh: %d: %s: not found\n",i, command);
+exit(EXIT_FAILURE);
+}
+exit (0);
 }
 

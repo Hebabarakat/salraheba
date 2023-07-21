@@ -21,25 +21,17 @@ if (pid == 0)
 {
 path = handle_path(argv[0], i);
 
-if (path)
-{
 	if (execve(path, argv, environ) == -1)
 {
 	_printf("./hsh: %d: %s: not found\n",i, argv[0]);
-      exit(127);
+      exit(EXIT_FAILURE);
     }
 }
-else
-{
 
-	_printf("./hsh: %d: %s: not found\n",i, argv[0]);
-	exit(127);
-  }
-}
 else
   {
     waitpid(pid, &status, 0);
-    }
+  }
     free(argv);
 }
 
