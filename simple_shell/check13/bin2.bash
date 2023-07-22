@@ -2,7 +2,7 @@
 
 ################################################################################
 # Description for the intranet check (one line, support Markdown syntax)
-# Set PATH to be an empty string and execute `ls`
+# Set an alias to `/bin/ls` and call 'alias' to display the alias list
 
 ################################################################################
 # The variable 'compare_with_sh' IS OPTIONNAL
@@ -21,7 +21,8 @@
 # as follows: "echo $shell_input | ./hsh"
 #
 # It can be empty and multiline
-shell_input="ls"
+shell_input="alias ls_alias=/bin/ls
+alias"
 
 ################################################################################
 # The variable 'shell_params' IS OPTIONNAL
@@ -41,9 +42,6 @@ shell_input="ls"
 # Return value: Discarded
 function check_setup()
 {
-	OLDPATH="$PATH"
-	export PATH=""
-
 	return 0
 }
 
@@ -84,8 +82,6 @@ function sh_setup()
 function check_callback()
 {
 	status=$1
-
-	export PATH="$OLDPATH"
 
 	return $status
 }
