@@ -7,12 +7,13 @@ non_interactive();
 }
 else
 {
-int i;
+int i, j;
 char *input;
 char **args;
 char c;
 c = '\0';
 i = 0;
+j= 0;
 while(1)
 {
 write(1, "$ ", 2);
@@ -21,8 +22,12 @@ input = _readline(c);
 args = strcut (input);
 _execve(args, i);
 }
-free(input);
+while(args)
+{
+free(args[j]);
+j++;
 }
-
+}
 return 0;
+
 }

@@ -15,7 +15,7 @@ path = _getenv("PATH");
 if (path == NULL)
 {
    _printf("./hsh: %d: %s: not found\n",i, command);
-exit (127);
+exit(-1);
 }
 
 for (dir = strtok(path, ":"); dir != NULL; dir = strtok(NULL, ":"))
@@ -38,14 +38,9 @@ if (access(command_path, X_OK) == 0)
 	return (command_path);
 
 }
+}
+return(NULL);
 
 }
-if (!command_path)
-{
-  /* Command not found */
-	_printf("./hsh: %d: %s: not found\n",i, command);
-exit(EXIT_FAILURE);
-}
-exit (0);
-}
+
 
