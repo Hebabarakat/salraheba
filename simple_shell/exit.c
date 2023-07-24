@@ -1,42 +1,49 @@
-int exit_status (char *input)
+#include "main.h"
+
+#define MAX_INPUT_LENGTH 100
+
+int main()
 {
-token = strtok(input, " ");
-if (strcmp(token, "exit") ==0)
+char input[MAX_INPUT_LENGTH];
+int status_code = 0;
+int input_pos = 0;
+int input_len = 0;
+int input_arg_pos = -1;
+int i;
+
+/* Read user input one character at a time */
+while (1)
 {
-/*Handle exit command*/
-token = strtok(NULL, " ");
-if (token != NULL)
-{
-/*If argument is provided, convert it to integer and use it as exit status*/
-int exit_status = atoi(token);
-exit(exit_status);
+char c = getchar();
+if (c == '\n' || c == EOF) {
+break;
 }
-else
-{
-/*If no argument is provided, use default exit status of 0*/
-exit(0);
+if (input_pos >= MAX_INPUT_LENGTH - 1) {
+fprintf(stderr, "Error: input too long\n");
+exit(1);
 }
+input[input_pos++] = c;
+}
+input[input_pos] = '\0';
+input_len = input_pos;
+
+/* Parse input */
+for (i = 0; i < input_len; i++) {
+if (input[i] == ' ') {
+input_arg_pos = i + 1;
+break;
+}
+}
+if (input_arg_pos != -1) {
+status_code = atoi(input + input_arg_pos);
 }
 
-
-int _atoi(const char *str)
-{
-int result = 0;
-int sign = 1;
-
-while (*str == ' ' || *str == '\t' || *str == '\n')
-{
-Str++;
+/* Handle exit command */
+if (strcmp(input, "exit") == 0) {
+exit(status_code);
 }
 
-if (*str == '+')
-{
-str++;
-}
-while (*str >= '0' && *str <= '9')
-{
-result = result * 10 + (*str - '0');
-str++;
-}
-return result * sign;
+/* Handle other commands */
+
+return 0;
 }
