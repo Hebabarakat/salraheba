@@ -6,7 +6,7 @@
  * 
  * 
 */
-#define MAX_ARGS 10
+#define MAX_ARGS 100
 char ** strcut (char *lineptr)
 {
 char **argv;
@@ -39,11 +39,11 @@ exit(EXIT_FAILURE);
     token = strtok(NULL, DELMITER);
 }
 argv[i] = NULL;
- if (strcmp (argv[0], "cd") == 0)
-         {
-         cd(argv[1]);
-	 return(0);
-         }
+if (strcmp (argv[0], "cd") == 0)
+{
+chdir(argv[1]);
+return(0);
+}
 else 
 {
 return(argv);
@@ -92,5 +92,3 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	}
 	return (p);
 }
-
-
