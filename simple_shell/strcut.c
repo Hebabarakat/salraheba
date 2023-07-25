@@ -39,7 +39,15 @@ exit(EXIT_FAILURE);
     token = strtok(NULL, DELMITER);
 }
 argv[i] = NULL;
+ if (strcmp (argv[0], "cd") == 0)
+         {
+         cd(argv[1]);
+	 return(0);
+         }
+else 
+{
 return(argv);
+}
 }
 
 /**

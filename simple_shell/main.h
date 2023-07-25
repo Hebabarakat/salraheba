@@ -12,12 +12,18 @@
 #include<stdarg.h>
 #define DELMITER " \t\r\n\a"
 #define del "\n"
+/*advanced.c*/
+int _setenv(const char *name, const char *value, int write);
+int _unsetenv(const char *name);
+void cd(char *path);
 
 void read_noninteractiv(char *lineptr, ssize_t nreads);
 extern char **environ;
 char *handle_path(char *command, int i);
 char *_getenv(const char *name);
 char *_readline(char c);
+int _putchar(char c);
+void _puts(char *str);
 void _env(void);
 void non_interactive (void);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
